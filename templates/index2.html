@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados da Votação</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #282c34; /* Fundo escuro para maior contraste */
+            color: #ffffff; /* Texto branco */
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em; /* Título principal grande */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.8em; /* Títulos menores para seções */
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        canvas {
+            width: 70% !important; /* Gráficos responsivos */
+            height: auto; /* Altura ajustável */
+            margin: 20px auto; /* Centraliza os gráficos */
+            display: block; /* Exibe os gráficos como blocos */
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultados da Votação</h1>
+
+    <h2>Presidente</h2>
+    <canvas id="graficoPresidente"></canvas>
+
+    <h2>Senador</h2>
+    <canvas id="graficoSenador"></canvas>
+
+    <h2>Governador</h2>
+    <canvas id="graficoGovernador"></canvas>
+
+    <h2>Prefeito</h2>
+    <canvas id="graficoPrefeito"></canvas>
+
+    <script>
+        function gerarGrafico(id, labels, data) {
+            var ctx = document.getElementById(id).getContext('2d');
+            var total = data.reduce((a, b) => a + b, 0); // Calcula o total de votos
+            var chart = new Chart(ctx, {
+                type: 'doughnut', // Gráfico de rosca
+                data: {
+                    labels: labels.map((label, index) => {
+                        let percentage = ((data[index] / total) * 100).toFixed(2); // Calcula porcentagem
+                        return `${label} (${percentage}%)`; // Adiciona porcentagem à legenda
+                    }),
+                    datasets: [{
+                        data: data,
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'], // Cores vivas
+                        hoverBackgroundColor: ['#FF4372', '#1F89E5', '#FFC845', '#309E9E'], // Cores ao passar o mouse
+                        borderWidth: 2, // Bordas das fatias
+                        borderColor: '#ffffff' // Cor da borda (branco)
+                    }]
+                },
+                options: {
+                    responsive: true, // Gráficos ajustáveis
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom', // Legenda abaixo dos gráficos
+                            labels: {
+                                color: '#ffffff' // Cor das etiquetas da legenda
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    let value = context.raw || 0;
+                                    let percentage = ((value / total) * 100).toFixed(2);
+                                    return `${label}: ${value} votos (${percentage}%)`;
+                                }
+                            },
+                            backgroundColor: '#222', // Cor do fundo do tooltip
+                            titleColor: '#fff', // Cor do título no tooltip
+                            bodyColor: '#fff' // Cor do texto no tooltip
+                        }
+                    },
+                    animations: {
+                        tension: {
+                            duration: 1500, // Duração das animações
+                            easing: 'easeOutBounce' // Efeito de salto
+                        }
+                    }
+                }
+            });
+        }
+
+        // Dados simulados de votos
+        var votos = {{ votos | tojson }};
+        
+        // Gerando os gráficos com os dados de votos
+        gerarGrafico("graficoPresidente", 
+            Object.keys(votos['Presidente']), 
+            Object.values(votos['Presidente']));
+
+        gerarGrafico("graficoSenador", 
+            Object.keys(votos['Senador']), 
+            Object.values(votos['Senador']));
+
+        gerarGrafico("graficoGovernador", 
+            Object.keys(votos['Governador']), 
+            Object.values(votos['Governador']));
+
+        gerarGrafico("graficoPrefeito", 
+            Object.keys(votos['Prefeito']), 
+            Object.values(votos['Prefeito']));
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquete Política</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="static/brasil.jpeg" alt="Logo da Instituição">
+        </div>
+        <h1>Enquete Política</h1>
+        
+        <label for="state">Estado em que você vota:</label>
+        <select id="state" name="state">
+            <option value="">Selecione</option>
+            <option value="ac">Acre</option>
+            <option value="al">Alagoas</option>
+            <option value="ap">Amapá</option>
+            <option value="am">Amazonas</option>
+            <option value="ba">Bahia</option>
+            <option value="ce">Ceará</option>
+            <option value="df">Distrito Federal</option>
+            <option value="es">Espírito Santo</option>
+            <option value="go">Goiás</option>
+            <option value="ma">Maranhão</option>
+            <option value="mt">Mato Grosso</option>
+            <option value="ms">Mato Grosso do Sul</option>
+            <option value="mg">Minas Gerais</option>
+            <option value="pa">Pará</option>
+            <option value="pb">Paraíba</option>
+            <option value="pr">Paraná</option>
+            <option value="pe">Pernambuco</option>
+            <option value="pi">Piauí</option>
+            <option value="rj">Rio de Janeiro</option>
+            <option value="rn">Rio Grande do Norte</option>
+            <option value="rs">Rio Grande do Sul</option>
+            <option value="ro">Rondônia</option>
+            <option value="rr">Roraima</option>
+            <option value="sc">Santa Catarina</option>
+            <option value="sp">São Paulo</option>
+            <option value="se">Sergipe</option>
+            <option value="to">Tocantins</option>
+        </select>
+
+        <label for="view">Opinião Política:</label>
+        <select id="view" name="view">
+            <option value="">Selecione</option>
+            <option value="liberal">Liberal</option>
+            <option value="conservador">Conservador</option>
+            <option value="centro">Centro</option>
+            <option value="esquerda">Esquerda</option>
+        </select>
+
+        <div class="table-grid">
+            <!-- Cabeçalho -->
+            <div></div>
+            <div>Muito Satisfeito</div>
+            <div>Satisfeito</div>
+            <div>Neutro</div>
+            <div>Insatisfeito</div>
+            <div>Discordo Plenamente</div>
+
+            <!-- Presidente -->
+            <div>Presidente</div>
+            <input type="radio" name="presidente" value="5">
+            <input type="radio" name="presidente" value="4">
+            <input type="radio" name="presidente" value="3">
+            <input type="radio" name="presidente" value="2">
+            <input type="radio" name="presidente" value="1">
+
+            <!-- Senador -->
+            <div>Senador</div>
+            <input type="radio" name="senador" value="5">
+            <input type="radio" name="senador" value="4">
+            <input type="radio" name="senador" value="3">
+            <input type="radio" name="senador" value="2">
+            <input type="radio" name="senador" value="1">
+
+            <!-- Governador -->
+            <div>Governador</div>
+            <input type="radio" name="governador" value="5">
+            <input type="radio" name="governador" value="4">
+            <input type="radio" name="governador" value="3">
+            <input type="radio" name="governador" value="2">
+            <input type="radio" name="governador" value="1">
+
+            <!-- Prefeito -->
+            <div>Prefeito</div>
+            <input type="radio" name="prefeito" value="5">
+            <input type="radio" name="prefeito" value="4">
+            <input type="radio" name="prefeito" value="3">
+            <input type="radio" name="prefeito" value="2">
+            <input type="radio" name="prefeito" value="1">
+        </div>
+
+        <button type="submit">Enviar</button>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+</html>
