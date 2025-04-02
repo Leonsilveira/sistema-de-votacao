@@ -1,0 +1,12 @@
+# Diretórios e arquivos temporários
+__pycache__/
+db/
+*.db
+
+# Diretórios gerados automaticamente
+dist/
+node_modules/
+
+# Logs e arquivos sensíveis
+*.log
+.env
